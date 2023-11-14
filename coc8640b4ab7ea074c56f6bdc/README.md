@@ -13,8 +13,8 @@ Head over to the links below to learn more about the Scrimba courses I'm learnin
 - [Our courses](https://scrimba.com/allcourses)
 - [The Frontend Career Path](https://scrimba.com/learn/frontend)
 - [Become a Scrimba Pro member](https://scrimba.com/pricing)
-
-#How To Install and use the Leads tracker extension
+  
+###How To Install and use the Leads tracker extension
 
 To install the "Leads tracker" Chrome extension, follow these steps:
 
