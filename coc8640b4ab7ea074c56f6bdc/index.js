@@ -30,9 +30,9 @@ function deleteLinkButton(deleteIcon, index) {
   deleteButtonCopy.addEventListener('click', function (event) {
     event.preventDefault();
 
-     // Remove the corresponding element from myLeads array
-     myLeads.splice(index, 1);
-     localStorage.setItem("myLeads", JSON.stringify(myLeads)); // Update localStorage
+    // Remove the corresponding element from myLeads array
+    myLeads.splice(index, 1);
+    localStorage.setItem("myLeads", JSON.stringify(myLeads)); // Update localStorage
 
     const listItem = this.parentElement; // Get the parent <li> element
     listItem.remove(); // Remove the entire <li> element containing the link and button
@@ -119,8 +119,6 @@ function createButtonCopy(iconSrc) {
   return buttonCopyClipBoard;
 }
 
-
-
 function copyToClipboard(text) {
   const textarea = document.createElement("textarea");
   textarea.value = text;
@@ -144,7 +142,6 @@ copyAllBtn.addEventListener("click", function () {
       console.error("Failed to copy links to clipboard:", error);
     });
 });
-
 /*Program made by Scrimba's project instructions given by instructor 'Per Harald Borgen' that were coded up by me, with further added functionalities devised and programed by me, 'Luis Uribe Zambrano' 
 that consist of: allowing you to copy all links into text that formats each new link in a new line break, gives you the ability to only copy one link from your visible list at a time if needed, added copy clipboard icons,
 gave each button different colors for further differentation, and did further css work to add a bit more visual and UX support for the chrome extension.
