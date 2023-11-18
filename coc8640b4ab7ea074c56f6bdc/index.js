@@ -8,13 +8,44 @@ const tabBtn = document.getElementById("tab-btn");
 const copyAllBtn = document.getElementById("copy-all-btn");
 
 // Assuming you have a buttonCopy variable to hold your image URL
-const buttonCopy = "images/copy-two-paper-sheets-interface-symbol.png";
+const buttonCopyOne = "images/copy-two-paper-sheets-interface-symbol.png";
+
+//Importing the X-mark image
+const deleteButtonImage = "images/x-mark.png";
+//<a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by Darius Dan - Flaticon</a>
 
 if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage;
   render(myLeads);
 }
+function deleteLinkButton(deleteIcon) {
+  const deleteButtonCopy = document.createElement("button");
+  
+  //deleteButtonCopy.textContent = "Delete"; // Set button text
 
+  deleteButtonCopy.style.border = "none"; // Remove button border
+  deleteButtonCopy.style.background = "none"; // Set button background to transparent
+  deleteButtonCopy.style.padding = "0"; // Remove button padding
+
+  deleteButtonCopy.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const listItem = this.parentElement; // Get the parent <li> element
+    listItem.remove(); // Remove the entire <li> element containing the link and button
+
+  })
+
+  const iconImg = document.createElement("img");
+  iconImg.style.width = "20px"; // Set the width of the icon (adjust as needed)
+  iconImg.style.height = "20px"; // Set the height of the icon (adjust as needed)
+  iconImg.style.marginLeft = "5px"; // Set the margin
+  iconImg.src = deleteIcon;
+  iconImg.alt = "clipboard icon for copying text/control+c hotkey button";
+  iconImg.style.filter = "invert(1)"; // Invert the colors to make it whit
+
+  deleteButtonCopy.appendChild(iconImg);
+  return  deleteButtonCopy;
+}
 // eventListener that gives us the current page's we're on's url
 tabBtn.addEventListener("click", function () {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -34,10 +65,12 @@ function render(leads) {
       link.href = leads[i];
       link.textContent = leads[i];
   
-      const buttonCopy = createButtonCopy("images/copy-two-paper-sheets-interface-symbol.png");  // Change the parameter name
-  
+      const buttonCopy = createButtonCopy(buttonCopyOne);  // Change the parameter name
+      const deleteLink = deleteLinkButton(deleteButtonImage);
+
       listItem.appendChild(link);
       listItem.appendChild(buttonCopy);
+      listItem.appendChild(deleteLink);
   
       ulEl.appendChild(listItem);
     }
@@ -81,6 +114,8 @@ function createButtonCopy(iconSrc) {
   buttonCopyClipBoard.appendChild(iconImg);
   return buttonCopyClipBoard;
 }
+
+
 
 function copyToClipboard(text) {
   const textarea = document.createElement("textarea");
