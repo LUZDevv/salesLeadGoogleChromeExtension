@@ -18,7 +18,7 @@ if (leadsFromLocalStorage) {
   myLeads = leadsFromLocalStorage;
   render(myLeads);
 }
-function deleteLinkButton(deleteIcon) {
+function deleteLinkButton(deleteIcon, index) {
   const deleteButtonCopy = document.createElement("button");
   
   //deleteButtonCopy.textContent = "Delete"; // Set button text
@@ -29,6 +29,10 @@ function deleteLinkButton(deleteIcon) {
 
   deleteButtonCopy.addEventListener('click', function (event) {
     event.preventDefault();
+
+     // Remove the corresponding element from myLeads array
+     myLeads.splice(index, 1);
+     localStorage.setItem("myLeads", JSON.stringify(myLeads)); // Update localStorage
 
     const listItem = this.parentElement; // Get the parent <li> element
     listItem.remove(); // Remove the entire <li> element containing the link and button
@@ -66,7 +70,7 @@ function render(leads) {
       link.textContent = leads[i];
   
       const buttonCopy = createButtonCopy(buttonCopyOne);  // Change the parameter name
-      const deleteLink = deleteLinkButton(deleteButtonImage);
+      const deleteLink = deleteLinkButton(deleteButtonImage, i);
 
       listItem.appendChild(link);
       listItem.appendChild(buttonCopy);
